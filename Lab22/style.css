@@ -1,0 +1,21 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    color: #007bff;
+    margin-bottom: 30px;
+}
+
+.container {
+    max-width: 800px;
+}
+
+button {
+    width: 100%;
+}
+
+.alert-heading {
+    color: #4CAF50;
+}
