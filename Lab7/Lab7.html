@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Chessboard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        header, footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            width: 100%;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            width: 90vw;
+            max-width: 500px;
+            aspect-ratio: 1;
+            border: 2px solid #333;
+        }
+
+        .chessboard div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .chessboard .white {
+            background-color: #fff;
+        }
+
+        .chessboard .black {
+            background-color: #000;
+            color: white;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .chessboard div {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Responsive Chessboard</h1>
+    </header>
+    <main>
+        <div class="chessboard">
+            <!-- 64 squares generated dynamically -->
+            <script>
+                const chessboard = document.querySelector('.chessboard');
+                for (let row = 0; row < 8; row++) {
+                    for (let col = 0; col < 8; col++) {
+                        const square = document.createElement('div');
+                        const isBlack = (row + col) % 2 !== 0;
+                        square.classList.add(isBlack ? 'black' : 'white');
+                        chessboard.appendChild(square);
+                    }
+                }
+            </script>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Chessboard Example. All rights reserved.</p>
+    </footer>
+</body>
+</html>
