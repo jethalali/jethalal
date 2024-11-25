@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merged Example: List Copy, Element Creation, and Adding Options</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        select {
+            width: 150px;
+            height: 100px;
+            margin: 10px 0;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 160px;
+        }
+        #content {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Merged Example</h1>
+
+    <h2>Copy Items from One List to Another</h2>
+    <select id="sourceList" multiple>
+        <option value="1">Item 1</option>
+        <option value="2">Item 2</option>
+        <option value="3">Item 3</option>
+        <option value="4">Item 4</option>
+    </select>
+
+    <button id="copyButton">Copy Selected</button>
+
+    <select id="destinationList" multiple>
+        <!-- Items will be copied here -->
+    </select>
+
+    <h2>Add a New Option to the Source List</h2>
+    <input type="text" id="newOptionText" placeholder="Enter new option text">
+    <button id="addOptionButton">Add Option</button>
+
+    <h2>Add a New Paragraph</h2>
+    <button id="addParagraphButton">Add Paragraph</button>
+    <div id="content"></div>
+
+    <script>
+        $(document).ready(function() {
+            // Copy selected items from source list to destination list
+            $('#copyButton').click(function() {
+                $('#sourceList option:selected').each(function() {
+                    // Clone the selected option and append it to the destination list
+                    $(this).clone().appendTo('#destinationList');
+                });
+            });
+
+            // Create a new paragraph when the button is clicked
+            $('#addParagraphButton').click(function() {
+                // Create a new paragraph element
+                var newParagraph = $('<p>This is a new paragraph!</p>');
+                // Append the new paragraph to the content div
+                $('#content').append(newParagraph);
+            });
+
+            // Add a new option to the source list
+            $('#addOptionButton').click(function() {
+                var newOptionText = $('#newOptionText').val();
+                if (newOptionText) {
+                    // Create a new option element
+                    var newOption = $('<option></option>').text(newOptionText).val(newOptionText);
+                    // Append the new option to the source list
+                    $('#sourceList').append(newOption);
+                    // Clear the input field
+                    $('#newOptionText').val('');
+                } else {
+                    alert('Please enter a value for the new option.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
