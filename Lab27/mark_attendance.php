@@ -1,26 +1,16 @@
 <?php
-session_start();
 include('db.php');
 
-// Check if the teacher is logged in
-if (!isset($_SESSION['teacher_id'])) {
-    header('Location: teacher_login.php');
-    exit();
-}
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $attendance = $_POST['attendance'];
+    $date = date("Y-m-d");
 
-// Check if students were selected
-if (isset($_POST['students'])) {
-    $students = $_POST['students'];
-    $date = date('Y-m-d'); // Attendance date
-
-    foreach ($students as $student_id) {
-        // Mark attendance as present
-        $sql = "INSERT INTO attendance (student_id, date, status) VALUES ('$student_id', '$date', 'Present')";
-        $conn->query($sql);
+    foreach ($attendance as $student_id => $status) {
+        $stmt = $conn->prepare("INSERT INTO attendance (student_id, date, status) VALUES (?, ?, ?)");
+        $stmt->bind_param("iss", $student_id, $date, $status);
+        $stmt->execute();
     }
 
-    echo "Attendance has been marked successfully!";
+    echo "Attendance marked successfully!";
 }
-
-$conn->close();
 ?>
