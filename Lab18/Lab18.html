@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Array Search and Sort</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 20px;
+    }
+    .output {
+      background-color: #e9ecef;
+      padding: 15px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center mb-4">Array Operations using JavaScript</h2>
+
+    <!-- Integer Array Section -->
+    <div class="card mb-4">
+      <div class="card-header">Search and Sort Integer Array</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="intArray" class="form-label">Enter integer elements (comma-separated):</label>
+          <input type="text" class="form-control" id="intArray" placeholder="Example: 5, 1, 8, 3, 2">
+        </div>
+        <div class="mb-3">
+          <button id="sortInt" class="btn btn-primary">Sort</button>
+          <button id="searchInt" class="btn btn-secondary">Search</button>
+        </div>
+        <div id="intOutput" class="output"></div>
+      </div>
+    </div>
+
+    <!-- Named Entity Array Section -->
+    <div class="card">
+      <div class="card-header">Named Entity Array</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="entityArray" class="form-label">Enter names (comma-separated):</label>
+          <input type="text" class="form-control" id="entityArray" placeholder="Example: Alice, Bob, Charlie, Eve">
+        </div>
+        <div class="mb-3">
+          <button id="sortNames" class="btn btn-primary">Sort Names</button>
+          <button id="searchNames" class="btn btn-secondary">Search Name</button>
+        </div>
+        <div id="entityOutput" class="output"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    $(document).ready(function () {
+      // Integer Array Operations
+      $('#sortInt').click(function () {
+        const intArray = $('#intArray').val().split(',').map(Number);
+        const sortedArray = intArray.sort((a, b) => a - b);
+        $('#intOutput').html(`<strong>Sorted Array:</strong> ${sortedArray.join(', ')}`);
+      });
+
+      $('#searchInt').click(function () {
+        const intArray = $('#intArray').val().split(',').map(Number);
+        const searchValue = prompt("Enter an integer to search:");
+        if (intArray.includes(Number(searchValue))) {
+          $('#intOutput').html(`<strong>Search Result:</strong> ${searchValue} found in the array.`);
+        } else {
+          $('#intOutput').html(`<strong>Search Result:</strong> ${searchValue} not found in the array.`);
+        }
+      });
+
+      // Named Entity Array Operations
+      $('#sortNames').click(function () {
+        const entityArray = $('#entityArray').val().split(',').map(name => name.trim());
+        const sortedNames = entityArray.sort();
+        $('#entityOutput').html(`<strong>Sorted Names:</strong> ${sortedNames.join(', ')}`);
+      });
+
+      $('#searchNames').click(function () {
+        const entityArray = $('#entityArray').val().split(',').map(name => name.trim());
+        const searchName = prompt("Enter a name to search:");
+        if (entityArray.includes(searchName)) {
+          $('#entityOutput').html(`<strong>Search Result:</strong> ${searchName} found in the list.`);
+        } else {
+          $('#entityOutput').html(`<strong>Search Result:</strong> ${searchName} not found in the list.`);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
